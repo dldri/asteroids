@@ -2,7 +2,9 @@
 # the open-source pygame library
 # throughout this file
 import pygame
-from player import *
+from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import *
 
 def main():
@@ -23,13 +25,18 @@ def main():
     # groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
 
-    # spawn player - must be done after adding containers
+    # initialisation
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
-    player_1 = Player(x, y)
+    Player(x, y)
+    AsteroidField()
+    
 
 
     while True:
@@ -44,9 +51,6 @@ def main():
         for obj in updatable:
             obj.update(dt)
 
-        # player_1.draw(screen)
-        # player_1.update(dt)
-        
         pygame.display.flip()
 
         # limit framerate to 60 FPS
