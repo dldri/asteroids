@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+from player import *
 from constants import *
 
 def main():
@@ -19,6 +20,11 @@ def main():
     # new GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    # spawn player
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    player_1 = Player(x, y)
+
     colour = (0,0,0)
 
     while True:
@@ -26,6 +32,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill(colour)
+        player_1.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
